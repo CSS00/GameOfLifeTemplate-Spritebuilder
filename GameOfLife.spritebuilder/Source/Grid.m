@@ -154,26 +154,18 @@ static const int GRID_COLUMNS = 10;
             // access the creature in the cell that corresponds to the current row/column
             Creature *currentCreature = _gridArray[i][j];
             // If it has 0-1 live neighbors the Creature on that cell dies or stays dead.
-            if(currentCreature.livingNeighbors == 0 || currentCreature.livingNeighbors == 1)
+            // OR If it has 4 or more, it stays dead or dies.
+            if(currentCreature.livingNeighbors == 0
+               || currentCreature.livingNeighbors == 1
+               || currentCreature.livingNeighbors >= 4)
             {
                 //if alive, go dead; if dead, stay
                 currentCreature.isAlive = NO;
-            }
-            //If it has 2-3 live neighbors it stays alive.
-            else if (currentCreature.livingNeighbors == 2 && currentCreature.isAlive)
-            {
-                //stay as it is
-                currentCreature.isAlive = currentCreature.isAlive;
             }
             //If it has exactly 3 neighbors and it is dead, it comes to life!
             else if (currentCreature.livingNeighbors == 3)
             {
                 currentCreature.isAlive = YES;
-            }
-            //If it has 4 or more, it stays dead or dies.
-            else if (currentCreature.livingNeighbors >= 4)
-            {
-                currentCreature.isAlive = NO;
             }
             if(currentCreature.isAlive)
             {
